@@ -13,11 +13,11 @@ def mask_account_card(data_acc_or_card: str) -> str:
     return masked_data
 
 
-# def get_date(str_with_date_and_time: str) -> str:
-#     "Функция, возвращающая дату в формате ДД.ММ.ГГГГ"
-#     day_mon_year = " "
-#     if len(str_with_date_and_time) == 26 and "T" in str_with_date_and_time:
-#         day_mon_year = f"{str_with_date_and_time[8:10]}.{str_with_date_and_time[5:7]}.{str_with_date_and_time[0:4]}"
-#     else:
-#         "Некорректный ввод"
-#     return day_mon_year
+def get_date(str_with_date_and_time: str) -> str:
+    "Функция, возвращающая дату в формате ДД.ММ.ГГГГ"
+    day_mon_year = " "
+    if len(str_with_date_and_time) == 26 and "T" in str_with_date_and_time:
+        day_mon_year = f"{str_with_date_and_time[8:10]}.{str_with_date_and_time[5:7]}.{str_with_date_and_time[0:4]}"
+    else:
+        "Некорректный ввод"
+    return day_mon_year
