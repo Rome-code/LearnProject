@@ -9,4 +9,6 @@ def filter_by_state(list_of_dicts: list, state: str = "EXECUTED") -> list:
     return filter_list
 
 
+def sort_by_date(data_list: list, data_key: str, descending: bool = True) -> list:
 
+    return sorted(data_list, key=lambda x: datetime.strptime(x[data_key], "%Y-%m-%dT%H:%M:%S.%f"), reverse=descending)
