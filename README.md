@@ -1,4 +1,4 @@
-# python_project_2
+# LearnProject
 
 **Краткое описание проекта**:
 
