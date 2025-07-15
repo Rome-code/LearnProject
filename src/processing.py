@@ -8,6 +8,8 @@ def filter_by_state(list_of_dicts: list, state: str = "EXECUTED") -> list:
     for dict_n in list_of_dicts:
         if state == dict_n.get("state"):
             filter_list.append(dict_n)
+        elif 'state' not in dict_n:
+            return list_of_dicts
     return filter_list
 
 
