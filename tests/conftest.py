@@ -84,3 +84,6 @@ date_and_time = "2018-10-14T08:21:33.419441"
 date_and_time_uncorrectly = "08:21:33.419441"
 
 date_and_time_uncorrectly_2 = "20fd-1r-y4Tsd:2i:3,.s19h4m"
+
+"Данные для test_decorators"
+
