@@ -85,6 +85,8 @@ date_and_time_uncorrectly = "08:21:33.419441"
 
 date_and_time_uncorrectly_2 = "20fd-1r-y4Tsd:2i:3,.s19h4m"
 
+"Данные для test_decorators"
+
 
 
 """Фикстуры и переменные для generators"""
@@ -388,7 +390,3 @@ card_number_generator_exp_result_6_10 = [
 '0000 0000 0000 0009',
 '0000 0000 0000 0010'
 ]
-
-
-
-
