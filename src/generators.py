@@ -19,7 +19,7 @@ def transaction_descriptions(transaction_list: list) -> Generator:
 
 
 def card_number_generator(start: int, stop: int) -> Generator:
-    if stop > start and start >= 1:
+    if stop > start >= 1:
         start += 1
         for number in range(start - 1, stop + 1):
             card_number = str(number)
