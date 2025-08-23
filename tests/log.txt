@@ -1,0 +1,3 @@
+my_function is ok
+my_function error: division by zero, input: (2, 0), {}
+func error: unsupported operand type(s) for +: 'int' and 'str', input: (1, '2'), {}
