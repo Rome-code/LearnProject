@@ -48,5 +48,3 @@ def excel_reader(excel_file_path: str) -> Any:
     except Exception as e:
         print(f"Произошла ошибка при чтении Excel файла: {e}")
 
-# excel_file_path = r"H:\Pyton-разработчик учеба\transactions_excel.xlsx"
-# print(excel_reader(excel_file_path))

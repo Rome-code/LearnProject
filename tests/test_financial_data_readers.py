@@ -46,3 +46,8 @@ def test_excel_reader(mock_read_excel: Any) -> None:
     assert result == expected_result
 
     mock_read_excel.assert_called_once_with("fake_path.xlsx")
+
+
+def test_excel_reader_file_not() -> None:
+    """Тест при отсутствии файла по указанному пути"""
+    assert excel_reader("nothing.xlsx") is None
