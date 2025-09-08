@@ -2,8 +2,10 @@ import csv
 
 import pandas as pd
 
+from typing import Any
 
-def csv_reader(csv_file_path: str) -> list:
+
+def csv_reader(csv_file_path: str) -> Any:
     """Функция, считывающая данные финансовых операций из CSV с файла и
        возвращающая список словарей с транзакциями"""
     try:
@@ -22,13 +24,17 @@ def csv_reader(csv_file_path: str) -> list:
     except Exception as e:
         print(f"Произошла ошибка при чтении Excel файла: {e}")
 
+path_to_csv_file = r"H:\Pyton-разработчик учеба\transactions.csv"
+print(csv_reader(path_to_csv_file))
 
-def excel_reader(excel_file_path: str) -> list:
+
+def excel_reader(excel_file_path: str) -> Any:
     """Функция, считывающая данные финансовых операций из CSV с файла и
        возвращающая список словарей с транзакциями"""
-    try:
-        excel_file_transactions = []
 
+    excel_file_transactions = []
+
+    try:
         excel_data = pd.read_excel(excel_file_path)
         excel_data_as_dicts = excel_data.to_dict("records")
 
@@ -41,3 +47,6 @@ def excel_reader(excel_file_path: str) -> list:
 
     except Exception as e:
         print(f"Произошла ошибка при чтении Excel файла: {e}")
+
+# excel_file_path = r"H:\Pyton-разработчик учеба\transactions_excel.xlsx"
+# print(excel_reader(excel_file_path))
