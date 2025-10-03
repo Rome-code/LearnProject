@@ -4,6 +4,8 @@ import pandas as pd
 
 from typing import Any
 
+from tests.conftest import path_to_csv_file
+
 
 def csv_reader(csv_file_path: str) -> Any:
     """Функция, считывающая данные финансовых операций из CSV с файла и
@@ -24,7 +26,7 @@ def csv_reader(csv_file_path: str) -> Any:
     except Exception as e:
         print(f"Произошла ошибка при чтении Excel файла: {e}")
 
-path_to_csv_file = r"H:\Pyton-разработчик учеба\transactions.csv"
+
 print(csv_reader(path_to_csv_file))
 
 

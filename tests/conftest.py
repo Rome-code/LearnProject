@@ -323,6 +323,10 @@ path_to_json_empty_file = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "operations_1.json"
 )
 
+not_path_to_json_file = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "oprations.json"
+)
+
 list_of_transaction = [
     {
         "id": 441945886,
@@ -1217,14 +1221,20 @@ list_of_transaction = [
     },
 ]
 
-not_path_to_json_file = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "oprations.json"
-)
-
 
 "Данные для test_financial_data_readers"
 
 mocked_file_content = 'id;state;date;amount;currency_name;currency_code;from;to;description\n650703;EXECUTED;2023-09-05T11:30:32Z;16210;Sol;PEN;Счет 58803664561298323391;Счет 39745660563456619397;Перевод организации'
+
+# path_to_csv_file = r"H:\Pyton-разработчик учеба\transactions.csv"
+
+path_to_csv_file = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions.csv"
+)
+
+path_to_xlsx_file = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions_excel.xlsx"
+)
 
 result_to_excel_file = [
     {
@@ -1239,3 +1249,8 @@ result_to_excel_file = [
         "description": "Перевод организации",
     }
 ]
+
+
+"""Переменные для financial_data_readers.py и test_financial_data_readers"""
+
+

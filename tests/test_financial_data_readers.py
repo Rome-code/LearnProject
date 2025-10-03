@@ -7,7 +7,7 @@ from typing import Any
 
 from src.financial_data_readers import csv_reader, excel_reader
 from tests.conftest import mocked_file_content, result_to_excel_file
-
+from tests.conftest import path_to_csv_file
 
 @patch("builtins.open", mock_open(read_data=mocked_file_content))
 def test_csv_reader_with_mock_and_patch() -> None:
@@ -51,3 +51,6 @@ def test_excel_reader(mock_read_excel: Any) -> None:
 def test_excel_reader_file_not() -> None:
     """Тест при отсутствии файла по указанному пути"""
     assert excel_reader("nothing.xlsx") is None
+
+
+
