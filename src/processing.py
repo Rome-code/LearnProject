@@ -14,6 +14,16 @@ def filter_by_state(list_of_dicts: list, state: str = "EXECUTED") -> list:
 
 
 def sort_by_date(data_list: list, data_key: str, descending: bool = True) -> list:
-    """Функция, сортирующая список словарей по ключу date с условием
+    """Сортировка по ключу date, с обработкой пропущенных дат, с условием
     по-умолчанию сортировать по убыванию"""
-    return sorted(data_list, key=lambda x: datetime.strptime(x[data_key], "%Y-%m-%dT%H:%M:%S.%f"), reverse=descending)
+    def parse_date(date_str):
+        try:
+            return datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%f")
+        except (ValueError, TypeError):
+            return datetime.min
+
+    return sorted(
+        data_list,
+        key=lambda x: parse_date(x.get(data_key)),
+        reverse=descending
+    )

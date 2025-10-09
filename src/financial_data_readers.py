@@ -27,9 +27,6 @@ def csv_reader(csv_file_path: str) -> Any:
         print(f"Произошла ошибка при чтении Excel файла: {e}")
 
 
-print(csv_reader(path_to_csv_file))
-
-
 def excel_reader(excel_file_path: str) -> Any:
     """Функция, считывающая данные финансовых операций из CSV с файла и
        возвращающая список словарей с транзакциями"""
