@@ -21,25 +21,27 @@ def test_main(monkeypatch, capsys, inputs, expected_calls) -> None:
     monkeypatch.setattr("builtins.input", mock_input)
 
     # Моки функций загрузки данных
-    with patch("src.utils.transactions_data", return_value=mock_transactions) as mock_transactions_data, \
-         patch("src.financial_data_readers.csv_reader", return_value=mock_transactions) as mock_csv_reader, \
-         patch("src.financial_data_readers.excel_reader", return_value=mock_transactions), \
-         patch("src.processing.filter_by_state", return_value=mock_filtered) as mock_filter_by_state, \
-         patch("src.processing.sort_by_date", return_value=mock_sorted) as mock_sort_by_date, \
-         patch("src.generators.filter_by_currency", return_value=mock_transactions), \
-         patch("src.widget.mask_account_card", side_effect=lambda acc: "***"):
+    with patch("src.main.transactions_data", return_value=mock_transactions) as mock_transactions_data, \
+         patch("src.main.csv_reader", return_value=mock_transactions) as mock_csv_reader, \
+         patch("src.main.excel_reader", return_value=mock_transactions), \
+         patch("src.main.filter_by_state", return_value=mock_filtered) as mock_filter_by_state, \
+         patch("src.main.sort_by_date", return_value=mock_sorted) as mock_sort_by_date, \
+         patch("src.main.filter_by_currency", return_value=mock_transactions) as mock_filter_by_currency, \
+         patch("src.main.mask_account_card", side_effect=lambda acc: "***"):
 
         # Вызываем main
         main()
 
-
-
     # Проверяем вызовы функций
-    for func_name in expected_calls:
-        assert mock_transactions_data.called
-        assert mock_filter_by_state.called
-        assert mock_csv_reader.called
+    mock_funcs = {
+        "transactions_data": mock_transactions_data,
+        "filter_by_state": mock_filter_by_state,
+        "sort_by_date": mock_sort_by_date,
+        "filter_by_currency": mock_filter_by_currency
+    }
 
+    for func_name in expected_calls:
+        assert mock_funcs[func_name].called
 
     # Проверяем вывод
     captured = capsys.readouterr()

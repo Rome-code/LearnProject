@@ -7,35 +7,22 @@ from src.widget import mask_account_card
 import os, re
 
 
-# json_file_path = os.path.join(
-#     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "operations.json"
-# )
-#
-# csv_file_path = os.path.join(
-#     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions.csv"
-# )
-#
-# xlsx_file_path = os.path.join(
-#     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions_excel.xlsx"
-# )
-
-
 def main():
     """Функция, которая отвечает за основную логику проекта и связывает функциональности между собой."""
-    # json_file_path = os.path.join(
-    #     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "operations.json"
-    # )
-    #
-    # csv_file_path = os.path.join(
-    #     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions.csv"
-    # )
-    #
-    # xlsx_file_path = os.path.join(
-    #     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions_excel.xlsx"
-    # )
-    json_file_path = r'C:\Users\Rome\work\tmp\LearnProject\data\operations.json'
-    csv_file_path = r'C:\Users\Rome\work\tmp\LearnProject\data\transactions.csv'
-    xlsx_file_path = r"C:\Users\Rome\work\tmp\LearnProject\data\transactions_excel.xlsx"
+    json_file_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "operations.json"
+    )
+
+    csv_file_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions.csv"
+    )
+
+    xlsx_file_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "transactions_excel.xlsx"
+    )
+    # json_file_path = r'C:\Users\Rome\work\tmp\LearnProject\data\operations.json'
+    # csv_file_path = r'C:\Users\Rome\work\tmp\LearnProject\data\transactions.csv'
+    # xlsx_file_path = r"C:\Users\Rome\work\tmp\LearnProject\data\transactions_excel.xlsx"
 
     def file_selection():
         """Функция, отвечающая за ввод выбранного варианта с файлом,
@@ -81,7 +68,7 @@ def main():
                 print(f'Операции отфильтрованы по статусу "{status_upper}"\n')
                 state_filtered_list = filter_by_state(transactions_from_sel_file, status_upper)
                 return state_filtered_list
-            
+
             else:
                 print('Некорректный статус, попробуйте снова.')
 
