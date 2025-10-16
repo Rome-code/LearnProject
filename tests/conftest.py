@@ -1254,4 +1254,11 @@ result_to_excel_file = [
 
 """Переменные для financial_data_readers.py и test_financial_data_readers"""
 
+"""Paths for main.py"""
+
+json_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "operations.json")
+
+csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "transactions.csv")
+
+xlsx_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "transactions_excel.xlsx")
 

@@ -4,8 +4,6 @@ import pandas as pd
 
 from typing import Any
 
-from tests.conftest import path_to_csv_file
-
 
 def csv_reader(csv_file_path: str) -> Any:
     """Функция, считывающая данные финансовых операций из CSV с файла и
