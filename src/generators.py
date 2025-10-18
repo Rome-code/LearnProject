@@ -4,8 +4,12 @@ from typing import Generator
 def filter_by_currency(transactions_list: list, currency: str) -> Generator:
     if len(transactions_list) > 0:
         for transaction in transactions_list:
-            if currency == transaction.get("operationAmount", {}).get("currency", {}).get("code") == currency:
-                yield transaction
+            if "operationAmount" in transaction:
+                if currency == transaction["operationAmount"]["currency"]["code"]:
+                    yield transaction
+            else:
+                if currency == transaction["currency_code"]:
+                    yield transaction
     else:
         yield []
 
