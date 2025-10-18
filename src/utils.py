@@ -2,13 +2,23 @@ import json
 import logging
 import os
 
+# Настройка логгера
+utils_logger = logging.getLogger("utils")
+
 
 def setup_logging_utils() -> None:
-
     utils_logger.setLevel(logging.DEBUG)
-    path_to_utils = os.path.abspath(os.path.join(os.pardir, "logs", "utils.log"))
 
-    utils_file_handler = logging.FileHandler(path_to_utils, mode="w")
+    # Определения пути
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    log_dir = os.path.join(project_root, "logs")
+
+    # Создаем директорию для логов
+    os.makedirs(log_dir, exist_ok=True)
+    path_to_utils = os.path.join(log_dir, "utils.log")
+
+    utils_file_handler = logging.FileHandler(path_to_utils, mode="w", encoding="utf-8")
     utils_file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
     utils_file_handler.setFormatter(utils_file_formatter)
     utils_logger.addHandler(utils_file_handler)
@@ -22,10 +32,6 @@ def setup_logging_utils() -> None:
 
 # Вызов функции настройки логирования
 setup_logging_utils()
-
-# Настройка логгера
-utils_logger = logging.getLogger("utils")
-
 
 def transactions_data(path_to_json_file: str) -> list:
     """Преобразование JSON-файла в список словарей"""

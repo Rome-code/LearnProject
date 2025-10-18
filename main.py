@@ -11,13 +11,14 @@ from src.widget import mask_account_card
 
 
 def main() -> Any:
-    """Функция, которая отвечает за основную логику проекта и связывает функциональности между собой."""
+    #Функция, которая отвечает за основную логику проекта и связывает функциональности между собой
 
     json_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "operations.json")
     csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "transactions.csv")
     xlsx_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "transactions_excel.xlsx")
 
     while True:
+        #Выбор файла из которгр будут браться данные транзакций
         selection_inf_file_input = input(
             """Привет! Добро пожаловать в программу работы с банковскими транзакциями.\n
         Выберите необходимый пункт меню:\n
@@ -45,7 +46,7 @@ def main() -> Any:
             print("Некорректный ввод, попробуйте снова\n")
 
     while True:
-        """Фильтрует список словарей с транзакциями по статусу транзакций"""
+        #Фильтрует список словарей с транзакциями по статусу транзакций
         status_for_filter_input = input(
             """\nВведите статус, по которому необходимо выполнить фильтрацию. \n
 Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING\n"""
@@ -61,11 +62,12 @@ def main() -> Any:
             print("Некорректный статус, попробуйте снова.")
 
     while True:
-        """Фильтрует список словарей с транзакциями по дате транзакций"""
+        #Фильтрует список словарей с транзакциями по дате транзакций
         sort_to_date_input = input("\nОтсортировать операции по дате? Да/Нет\n")
 
         if sort_to_date_input.upper() in ["ДА", "LF"]:
             while True:
+                #Сортирует список словарей по возрастанию или убыванию
                 descending_selection = input(
                     """Отсортировать по возрастанию или по убыванию?\n
                 1. По возрастанию
@@ -93,7 +95,7 @@ def main() -> Any:
         rub_or_not_rub_transactions = input("Выводить только рублевые транзакции? Да/Нет\n")
 
         if rub_or_not_rub_transactions.upper() in ["ДА", "LF"]:
-            rub_filtered_list = filter_by_currency(date_sorted_list, "RUB")
+            rub_filtered_list = list(filter_by_currency(date_sorted_list, "RUB"))
             break
         elif rub_or_not_rub_transactions.upper() in ["НЕТ", "YTN"]:
             rub_filtered_list = date_sorted_list
@@ -102,7 +104,7 @@ def main() -> Any:
             print("Некорректный ввод, попробуйте снова")
 
     while True:
-        """Фильтр транзакций по наличию слова в описании"""
+        #Фильтр транзакций по наличию слова в описании
         filter_choice = input("Отфильтровать по слову в описании? Да/Нет: ")
 
         if filter_choice.upper() in ["ДА", "LF"]:
@@ -115,18 +117,23 @@ def main() -> Any:
         else:
             print("Некорректный ввод, попробуйте снова.")
 
-    print(f"Всего операций в выборке: {len(filtered_list)}")
-    print()
-
     if len(filtered_list) > 0:
+        print(f"Всего операций в выборке: {len(filtered_list)}\n")
+
         for t in filtered_list:
             # Изменение формата даты на дд.мм.гггг
             datetime_obj = datetime.fromisoformat(t["date"])
             date_str = datetime_obj.strftime("%d.%m.%Y")
 
             description = t.get("description", "")
-            amount = t["operationAmount"]["amount"]
-            currency_name = t["operationAmount"]["currency"]["name"]
+
+            #обработка возможной ошибки с ключом
+            if "operationAmount" in t:
+                amount = t["operationAmount"]["amount"]
+                currency_name = t["operationAmount"]["currency"]["name"]
+            else:
+                amount = t["amount"]
+                currency_name = t["currency_name"]
 
             # Определяем тип операции по description
             if "Перевод" in description:
@@ -141,8 +148,10 @@ def main() -> Any:
             to_account = t.get("to", "")
 
             # Маскируем номера карт/счётов с функцией mask_account_card
-            from_masked = mask_account_card(from_account)
+            if type(from_account) == str:
+                from_masked = mask_account_card(from_account)
             to_masked = mask_account_card(to_account)
+            
             if "Перевод" in description:
                 print(f"{date_str} {operation_type}")
                 print(f"{from_masked} -> {to_masked}")
@@ -155,7 +164,7 @@ def main() -> Any:
                 print(f"{date_str} {operation_type}")
                 print(f"Сумма: {amount} {currency_name}\n")
     else:
-        return "Не найдено ни одной транзакции, подходящей под ваши условия фильтрации"
+        print( "Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
 
 
 if __name__ == "__main__":

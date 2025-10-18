@@ -2,11 +2,23 @@ import logging
 import os
 
 
+# Настройка логгера
+masks_logger = logging.getLogger("masks")
+
+
 def setup_logging_masks() -> None:
     masks_logger.setLevel(logging.DEBUG)
-    path_to_masks = os.path.abspath(os.path.join(os.pardir, "logs", "masks.log"))
 
-    masks_file_handler = logging.FileHandler(path_to_masks, mode="w")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    log_dir = os.path.join(project_root, "logs")
+
+    # Создаем директорию для логов
+    os.makedirs(log_dir, exist_ok=True)
+
+    path_to_masks = os.path.join(log_dir, "masks.log")
+
+    masks_file_handler = logging.FileHandler(path_to_masks, mode="w", encoding="utf-8")
     masks_file_formatter = logging.Formatter("%(asctime)s %(filename)s %(levelname)s: %(message)s")
     masks_file_handler.setFormatter(masks_file_formatter)
     masks_logger.addHandler(masks_file_handler)
@@ -17,11 +29,10 @@ def setup_logging_masks() -> None:
     masks_logger.error("Error message")
     masks_logger.critical("Critical message")
 
+
 # Вызов функции настройки логирования
 setup_logging_masks()
 
-# Настройка логгера
-masks_logger = logging.getLogger("masks")
 
 def get_mask_card_number(card_num: str) -> str:
     """Функция для маскировки номера карты"""
